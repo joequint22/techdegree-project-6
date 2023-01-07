@@ -4,14 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const phrase = document.getElementById('phrase').firstElementChild;
         const startButton = document.querySelector('.btn__reset');
         const overlay = document.getElementById('overlay');
-        const scoreboard = document.getElementById('scoreboard');
-        const li = scoreboard.children;
+        const scoreboard = document.querySelector('ol');
       
 
         let missedCounter = 0;
 
 
-        let phrases = ["we live in a twilight world and there are no friends at dusk",  "you musnt be afraid to dream a little bigger darling", "parents are the ghosts of their childrens future", "why so serious", "a mans grasp should exceed his nerve"];
+        let phrases = ["nick cannon couldnt pull out of a driveway",  "you musnt be afraid to dream a little bigger darling", "some men just want to watch the world burn", "im addicted to blunt force trauma", "find someone who looks at you"];
         
 
         // returns a random phrase from the array
@@ -94,7 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(letters.length === shownLetters.length){
                                 overlay.className = 'win';
                                 overlay.textContent = 'You are a winner!';
+                                overlay.fontSize = '10px'
+                                const h2 = document.createElement('h2');
+                                h2.className = 'title';
+                                h2.style.paddingTop = '50px';
+                                h2.textContent = phrase.textContent;
                                 overlay.style.display = 'flex';
+                                overlay.appendChild(h2);
                                 return overlay;
                         }
                
@@ -120,6 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 missedCounter += 1;
                                 if(missedCounter === 5){
                                                 checkWin();
+                                }
+                                const lis = scoreboard.children;
+                                for(let i=0; i<lis.length; i++){
+                                        let li = lis[0];
+                                        li.remove();
+                                        return lis;
                                 }
                                 return missedCounter;
 

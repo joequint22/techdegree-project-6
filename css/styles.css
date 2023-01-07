@@ -23,6 +23,8 @@
 }
 
 body {
+  width: 80vw;
+  margin: 0 auto;
   justify-content: space-evenly;
   flex-direction: column;
   display: flex;
