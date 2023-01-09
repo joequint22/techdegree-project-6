@@ -14,6 +14,7 @@
   --font-size-large: 60px;
   --font-size-medium: 20px;
   --transition: all .2s ;
+  --msu-color: #18453b;
 }
 
 /* main */
@@ -54,9 +55,9 @@ button {
   margin: 4px;
   border: 1px solid transparent;
   padding: .5rem 1rem;
-  color: var(--color-keys);
+  color: rgb(229, 229, 229);
   font-size: var(--font-size-medium);
-  background-color: var(--color-keys-light);
+  background-color: rgb(101, 101, 101);
   border-radius: 5px;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
@@ -64,8 +65,8 @@ button {
 }
 button:hover{
   transform: scale(1.235);
-  color: rgb(0, 0, 0);
-  background: rgb(255, 255, 255)
+  color: white;
+  background:var(--msu-color);
 }
 
 .main-container {
@@ -90,6 +91,7 @@ button:hover{
 }
 
 /* Phrase */
+
 
 .letter {
   font-size: var(--font-size-medium);
