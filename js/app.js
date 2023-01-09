@@ -124,25 +124,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         if ( match === null  && missedCounter < 5){  
                                 missedCounter += 1;
                                 if(missedCounter === 5){
-                                                checkWin();
-                                }
-                                const lis = scoreboard.children;
-                                for(let i=0; i<lis.length; i++){
-                                        let li = lis[0];
-                                        li.remove();
-                                        return lis;
+                                        checkWin();
+                                }else  {
+                                        let lis = scoreboard.children;
+                                        for(let i=0; i<lis.length; i++){
+                                                let li = lis[i];
+                                                let images = li.children;
+                                                for(let i=0; i<images.length; i++){
+                                                        let image = images[i];
+                                                                if(image.className !== "lostHeart"){
+                                                                        image.className = "lostHeart"
+                                                                        image.src = "images/lostHeart.png";
+                                                                        return image;
+                                                                }
+                                                        return image;
+                                                }
+                                                return li;
+                                        }
+                                        return lis
                                 }
                                 return missedCounter;
-
-                        } else {
-                                checkWin();
-                        }    
-
-                
-                } 
-                        
-                
-        });
-        
-                
+                        }
+                        return match;
+                              
+                } else {
+                        checkWin();
+                }
+        });            
 });
