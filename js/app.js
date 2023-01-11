@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let missedCounter = 0;
 
 
-        let phrases = ["nick cannon couldnt pull out of a driveway",  "you musnt be afraid to dream a little bigger darling", "some men just want to watch the world burn", "im addicted to blunt force trauma", "find someone who looks at you"];
+        let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
         
 
         // returns a random phrase from the array
@@ -137,18 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                         image.src = "images/lostHeart.png";
                                                                         return image;
                                                                 }
-                                                        return image;
                                                 }
-                                                return li;
+                                               
                                         }
                                         return lis
                                 }
                                 return missedCounter;
                         }
-                        return match;
+                        else {
+                                checkWin();
+                        }
                               
-                } else {
-                        checkWin();
-                }
+                } 
         });            
 });

@@ -117,6 +117,7 @@ button:hover{
   margin: .75px 1px;
   height: 65px;
   border-radius: 5px;
+  transition: .6s;
 }
 
 /* Keyboard */
