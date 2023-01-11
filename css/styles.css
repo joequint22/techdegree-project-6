@@ -61,7 +61,7 @@ button {
   border-radius: 5px;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
-  transition: .235s;
+  transition: .235s ;
 }
 button:hover{
   transform: scale(1.235);
@@ -133,7 +133,7 @@ button:hover{
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
-  opacity: 0;
+  opacity: .25;
 }
 
 .btn__reset {
@@ -146,7 +146,7 @@ button:hover{
   opacity: .2;
 }
 .btn__reset:hover{
-  transition: .235s;
+  transition: .235s ease-in-out;
   opacity: 1;
 }
 
