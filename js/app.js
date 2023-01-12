@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startOver.style.backgroundColor = 'black';
         startOver.style.color = 'white';
         startOver.className = 'button';
-        startOver.style.marginTop ='60px';
+        startOver.style.marginTop ='50px';
         startOver.style.marginBottom ='0px';
 
 
@@ -98,20 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                         overlay.className = 'lose';
                         overlay.style.display = 'flex';
-                        overlay.textContent = 'You are a loser!';
+                        overlay.textContent = 'You are a loser!'
+                        overlay.style.font = 'Tahoma'
+                        overlay.style.fontSize = '30px'
+                        startOver.style.marginBottom = '26.5px';
                         overlay.appendChild(startOver);
                         missedCounter = 0;
                         return overlay;
                 } 
                 if(letters.length === shownLetters.length){
                                 overlay.className = 'win';
-                                // overlay.style.zIndex = -1;
                                 overlay.style.display = 'flex';
                                 overlay.textContent = 'You are a winner!';
                                 overlay.style.font = 'Tahoma'
                                 overlay.style.fontSize = '30px'
+                                startOver.style.marginBottom = '26.5px'
                                 overlay.appendChild(startOver);
-                                overlay.appendChild()
+                                overlay.appendChild(phrase)
                                 return overlay;                               
                         }
                 
