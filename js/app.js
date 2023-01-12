@@ -105,9 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 } 
                 if(letters.length === shownLetters.length){
                                 overlay.className = 'win';
+                                // overlay.style.zIndex = -1;
                                 overlay.style.display = 'flex';
-                                
+                                overlay.textContent = 'You are a winner!';
+                                overlay.style.font = 'Tahoma'
+                                overlay.style.fontSize = '30px'
                                 overlay.appendChild(startOver);
+                                overlay.appendChild()
                                 return overlay;                               
                         }
                 
