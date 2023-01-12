@@ -2,15 +2,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const qwerty = document.getElementById('qwerty');
         const phrase = document.getElementById('phrase').firstElementChild;
-        const startButton = document.querySelector('.btn__reset');
         const overlay = document.getElementById('overlay');
         const scoreboard = document.querySelector('ol');
-      
+
+
+        const startButton = document.querySelector('.btn__reset');
+
+        const startOver = createElement('button', 'textContent', 'Start Over');
+        startOver.style.backgroundColor = 'black';
+        startOver.style.color = 'white';
+        startOver.className = 'button';
+        startOver.style.marginTop ='60px';
+        startOver.style.marginBottom ='0px';
+
 
         let missedCounter = 0;
+        
+        //create new element function
+        function createElement(element, property, value){
+                const newElement = document.createElement(element);
+                newElement[property] = value;
+                return newElement;
+        }
 
-
-        let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
+        let phrases = ['a', 'a', 'a', 'a', 'a']
+        // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
         
 
         // returns a random phrase from the array
@@ -77,39 +93,46 @@ document.addEventListener('DOMContentLoaded', () => {
                                         }
                                 letters.push[letter];
                                 return letters;
-                                }  
-                                                                         
+                                }                                             
                         }
-                       
-
                 } else {
                         overlay.className = 'lose';
-                        overlay.textContent = 'You are a loser!';
                         overlay.style.display = 'flex';
+                        overlay.textContent = 'You are a loser!';
+                        overlay.appendChild(startOver);
                         missedCounter = 0;
                         return overlay;
                 } 
-                
                 if(letters.length === shownLetters.length){
                                 overlay.className = 'win';
-                                overlay.textContent = 'You are a winner!';
-                                overlay.fontSize = '10px'
-                                const h2 = document.createElement('h2');
-                                h2.className = 'title';
-                                h2.style.paddingTop = '50px';
-                                h2.textContent = phrase.textContent;
                                 overlay.style.display = 'flex';
-                                overlay.appendChild(h2);
-                                return overlay;
                                 
+                                overlay.appendChild(startOver);
+                                return overlay;                               
                         }
-               
-                
-
-                
-        
                 
         };
+
+        const restartKeys = keyboard => {
+                let keyRow = keyboard.children;
+                for(let i=0; i<keyRow.length; i++){
+                        let key = keyRow[i];
+                        if(key.className === 'show'){
+                                key.className = ''
+                                return key;
+                        }
+                }
+                return keyRow
+        };
+        
+        
+        //listen for the start over button to be pressed
+        startOver.addEventListener('click', () => {
+                overlay.style.display = 'flex';
+                restartKeys(qwerty);
+                return qwerty;
+
+        });
 
         //listen for the start game button to be pressed
         startButton.addEventListener('click', () => {

@@ -48,7 +48,6 @@ h2 {
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;
   font-size: var(--font-size-large);
-  margin: 0;
 }
 
 button {
@@ -69,6 +68,10 @@ button:hover{
   background:var(--msu-color);
 }
 
+.startOver {
+  margin-top: 55px;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -87,6 +90,7 @@ button:hover{
 /* Title */
 
 .header {
+  margin-top: 10px;
   color: var(--color-start);
 }
 
@@ -139,14 +143,16 @@ button:hover{
 .btn__reset {
   padding: 8px;
   margin: 50px auto;
-  background: #FFFFFF;
+  background: #000000;
   border-radius: 5px;
   font-size: var(--font-size-medium);
-  transition: .235s ease 3s;
+  transition: .235s;
   opacity: .2;
 }
 .btn__reset:hover{
-  transition: .235s ease-in-out;
+  background-color: black;
+  transition: .235s;
+  transform: scale(1.235);
   opacity: 1;
 }
 
