@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const phrase = document.getElementById('phrase').firstElementChild;
         const overlay = document.getElementById('overlay');
         const scoreboard = document.querySelector('ol');
-
-
         const startButton = document.querySelector('.btn__reset');
 
+        let phrases = ['a', 'a', 'a', 'a', 'a']
+        // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
+
+        //Start Over Dom styled button
         const startOver = createElement('button', 'textContent', 'Start Over');
         startOver.style.backgroundColor = 'black';
         startOver.style.color = 'white';
@@ -17,6 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         let missedCounter = 0;
+
+        //reseting hearts function
+        const reset = () => {
+                restartKeys(qwerty);
+                let lis = scoreboard.children;
+                                        for(let i=0; i<lis.length; i++){
+                                                let li = lis[i];
+                                                let images = li.children;
+                                                for(let i=0; i<images.length; i++){
+                                                        let image = images[i];
+                                                                if(image.className !== "lostHeart"){
+                                                                        image.className = "lostHeart"
+                                                                        image.src = "images/lostHeart.png";
+                                                                        return image;
+                                                                }
+                                                }
+                                               
+                                        }
+        };
         
         //create new element function
         function createElement(element, property, value){
@@ -25,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return newElement;
         }
 
-        let phrases = ['a', 'a', 'a', 'a', 'a']
-        // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
+       
         
 
         // returns a random phrase from the array
@@ -123,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const restartKeys = keyboard => {
                 let keyRow = keyboard.children;
                 for(let i=0; i<keyRow.length; i++){
-                        let key = keyRow[i];
-                        if(key.className === 'show'){
+                        let key = keyRow[i].children;
+                        if(key.className === 'chosen' || key.className === 'show' ){
                                 key.className = ''
                                 return key;
                         }
@@ -135,7 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //listen for the start over button to be pressed
         startOver.addEventListener('click', () => {
-                overlay.style.display = 'flex';
+                if(overlay.className === 'win' || overlay.className === 'lose'){
+                        overlay.className = '';
+                        overlay.style.display = 'flex';
+                        return overlay;
+                }
                 restartKeys(qwerty);
                 return qwerty;
 
