@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scoreboard = document.querySelector('ol');
         const startButton = document.querySelector('.btn__reset');
 
-        let phrases = ['a', 'a', 'a', 'a', 'a']
+        let phrases = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa']
         // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
 
         //Start Over Dom styled button
@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //reseting hearts function
         const reset = () => {
-                restartKeys(querty);
                 let lis = scoreboard.children;
                                         for(let i=0; i<lis.length; i++){
                                                 let li = lis[i];
@@ -32,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                 if(image.className !== "liveHeart"){
                                                                         image.className = "liveHeart"
                                                                         image.src = "images/liveHeart.png";
-                                                                        return image;
                                                                 }
                                                 }
                                                
                                         }
+                return lis
         };
         
         //create new element function
@@ -139,27 +138,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
         };
 
-        const restartKeys = keyboard => {
-                let keyRow = keyboard.children;
-                for(let i=0; i<keyRow.length; i++){
-                        let key = keyRow[i].children;
-                        if(key.className === 'chosen' ){
-                                key.className = ''
-                                return key;
+        const resetKeys = () => {
+                let divs = qwerty.children;
+                for(let i=0; i<divs.length; i++){
+                        let buttons = divs[i].children;
+                        for(let i=0; i<buttons.length; i++){
+                                let button = buttons[i];
+                                if(button.className === 'chosen'){
+                                        button.className = '';
+                                }
                         }
                 }
-                return keyboard;
+                return divs
         };
         
         
         //listen for the start over button to be pressed
         startOver.addEventListener('click', () => {
-                if(overlay.className === 'win' || overlay.className === 'lose'){
-                        overlay.className = '';
-                        overlay.style.zIndex = '-1';
-                        return overlay;
-                }
-                restartKeys(qwerty);
+                overlay.style.zIndex = '-1';
+                // if(overlay.className === 'win' || overlay.className === 'lose'){
+                       
+                        reset();
+                        resetKeys();
+                        
+                // } 
+                const random = addPhraseToDisplay(randomPhrase);
+                return random;
         });
 
         //listen for the start game button to be pressed
