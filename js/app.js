@@ -127,17 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         return overlay;
                 } 
                 if(letters.length === shownLetters.length){
-                                overlay.className = 'win';
-                                overlay.style.display = 'flex';
-                                overlay.textContent = 'You are a winner!';
-                                overlay.style.font = 'Tahoma'
-                                overlay.style.fontSize = '30px'
-                                startOver.style.marginBottom = '26.5px'
-                                overlay.appendChild(startOver);
-                                overlay.appendChild(phrase)
-                                return overlay;                               
-                        }
-                
+                        overlay.className = 'win';
+                        overlay.style.display = 'flex';
+                        overlay.textContent = 'You are a winner!';
+                        overlay.style.font = 'Tahoma'
+                        overlay.style.fontSize = '30px'
+                        startOver.style.marginBottom = '26.5px'
+                        overlay.appendChild(startOver);
+                        overlay.appendChild(phrase)
+                        return overlay;                               
+                }
         };
 
         const restartKeys = keyboard => {
@@ -157,12 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
         startOver.addEventListener('click', () => {
                 if(overlay.className === 'win' || overlay.className === 'lose'){
                         overlay.className = '';
-                        overlay.style.display = 'flex';
+                        overlay.style.zIndex = '-1';
                         return overlay;
                 }
                 restartKeys(qwerty);
                 return qwerty;
-
         });
 
         //listen for the start game button to be pressed
