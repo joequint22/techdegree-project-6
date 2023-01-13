@@ -104,13 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                         overlay.className = 'lose';
                         overlay.style.display = 'flex';
-                        overlay.textContent = 'You are a loser!'
+                        overlay.textContent = 'Sorry, you lost!'
                         overlay.style.font = 'Tahoma'
                         overlay.style.fontSize = '30px'
                         startOver.style.marginBottom = '26.5px';
                         overlay.appendChild(startOver);
                         missedCounter = 0;
-                        return overlay;
+                        return;
                 } 
                 if(letters.length === shownLetters.length){
                         overlay.className = 'win';
@@ -119,9 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         overlay.style.font = 'Tahoma'
                         overlay.style.fontSize = '30px'
                         startOver.style.marginBottom = '26.5px'
-                        overlay.appendChild(startOver);
                         overlay.appendChild(phrase)
-                        return overlay;                               
+                        overlay.appendChild(startOver);
+                        missedCounter = 0;
+
+                        return;                               
                 }
         };
 
@@ -203,8 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //listen for the start over button to be pressed
         startOver.addEventListener('click', () => {
-                if(missedCounter === 5){
-                        missedCounter = 0
+                if(missedCounter === 5){    
+                        missedCounter = 0    
                         let lis = scoreboard.children;
                         for(let i=0; i<lis.length; i++){
                                 let li = lis[i];
@@ -220,20 +222,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         return lis
                         
+                } else {
+                        missedCounter = 0
+                        overlay.style.zIndex = '-1';
+                        const phraseBtn = createElement('button', 'className', '.button')
+                        phraseBtn.textContent = 'New Phrase';
+                        phraseBtn.style.marginRight = '100px';
+                        phraseBtn.style.diplay = 'flex';
+                        divSB.insertBefore(phraseBtn, scoreboard);                       
+                        reset();
+                        resetKeys();
+                
+                
+                        const random = getRandomPhraseAsArray(phrases)
+                        addPhraseToDisplay(random);
+                        return;
                 }
-                overlay.style.zIndex = '-1';
-                const phraseBtn = createElement('button', 'className', '.button')
-                phraseBtn.textContent = 'New Phrase';
-                phraseBtn.style.marginRight = '100px';
-                phraseBtn.style.diplay = 'flex';
-                divSB.insertBefore(phraseBtn, scoreboard);                       
-                reset();
-                resetKeys();
-               
-               
-                const random = getRandomPhraseAsArray(phrases)
-                addPhraseToDisplay(random);
-                return;
                 
                 
         });            
