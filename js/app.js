@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const phrase = document.getElementById('phrase').firstElementChild;
         const overlay = document.getElementById('overlay');
         const scoreboard = document.querySelector('ol');
+        const divSB = document.getElementById('scoreboard');
         const startButton = document.querySelector('.btn__reset');
+        const mainContainer = document.querySelector('.main-container');
 
         let phrases = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa']
         // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
@@ -21,22 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let missedCounter = 0;
 
         //reseting hearts function
-        const reset = () => {
-                let lis = scoreboard.children;
-                                        for(let i=0; i<lis.length; i++){
-                                                let li = lis[i];
-                                                let images = li.children;
-                                                for(let i=0; i<images.length; i++){
-                                                        let image = images[i];
-                                                                if(image.className !== "liveHeart"){
-                                                                        image.className = "liveHeart"
-                                                                        image.src = "images/liveHeart.png";
-                                                                }
-                                                }
-                                               
-                                        }
-                return lis
-        };
+        
         
         //create new element function
         function createElement(element, property, value){
@@ -153,18 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         
-        //listen for the start over button to be pressed
-        startOver.addEventListener('click', () => {
-                overlay.style.zIndex = '-1';
-                // if(overlay.className === 'win' || overlay.className === 'lose'){
-                       
-                        reset();
-                        resetKeys();
-                        
-                // } 
-                const random = addPhraseToDisplay(randomPhrase);
-                return random;
-        });
+       
 
         //listen for the start game button to be pressed
         startButton.addEventListener('click', () => {
@@ -205,5 +181,60 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                               
                 } 
+        }); 
+
+        //reset hearts
+        const reset = () => {
+                let lis = scoreboard.children;
+                                        for(let i=0; i<lis.length; i++){
+                                                let li = lis[i];
+                                                let images = li.children;
+                                                for(let i=0; i<images.length; i++){
+                                                        let image = images[i];
+                                                                if(image.className !== "liveHeart"){
+                                                                        image.className = "liveHeart"
+                                                                        image.src = "images/liveHeart.png";
+                                                                }
+                                                }
+                                               
+                                        }
+                return lis
+        };
+        
+        //listen for the start over button to be pressed
+        startOver.addEventListener('click', () => {
+                if(missedCounter === 5){
+                        missedCounter = 0
+                        let lis = scoreboard.children;
+                        for(let i=0; i<lis.length; i++){
+                                let li = lis[i];
+                                let images = li.children;
+                                for(let i=0; i<images.length; i++){
+                                        let image = images[i];
+                                                if(image.className !== "liveHeart"){
+                                                        image.className = 'liveHeart';
+                                                        return image;
+                                                }
+                                }
+                               
+                        }
+                        return lis
+                        
+                }
+                overlay.style.zIndex = '-1';
+                const phraseBtn = createElement('button', 'className', '.button')
+                phraseBtn.textContent = 'New Phrase';
+                phraseBtn.style.marginRight = '100px';
+                phraseBtn.style.diplay = 'flex';
+                divSB.insertBefore(phraseBtn, scoreboard);                       
+                reset();
+                resetKeys();
+               
+               
+                const random = getRandomPhraseAsArray(phrases)
+                addPhraseToDisplay(random);
+                return;
+                
+                
         });            
 });
