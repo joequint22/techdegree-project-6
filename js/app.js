@@ -22,16 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //reseting hearts function
         const reset = () => {
-                restartKeys(qwerty);
+                restartKeys(querty);
                 let lis = scoreboard.children;
                                         for(let i=0; i<lis.length; i++){
                                                 let li = lis[i];
                                                 let images = li.children;
                                                 for(let i=0; i<images.length; i++){
                                                         let image = images[i];
-                                                                if(image.className !== "lostHeart"){
-                                                                        image.className = "lostHeart"
-                                                                        image.src = "images/lostHeart.png";
+                                                                if(image.className !== "liveHeart"){
+                                                                        image.className = "liveHeart"
+                                                                        image.src = "images/liveHeart.png";
                                                                         return image;
                                                                 }
                                                 }
@@ -143,12 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 let keyRow = keyboard.children;
                 for(let i=0; i<keyRow.length; i++){
                         let key = keyRow[i].children;
-                        if(key.className === 'chosen' || key.className === 'show' ){
+                        if(key.className === 'chosen' ){
                                 key.className = ''
                                 return key;
                         }
                 }
-                return keyRow
+                return keyboard;
         };
         
         
@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         return overlay;
                 }
                 restartKeys(qwerty);
-                return qwerty;
         });
 
         //listen for the start game button to be pressed
