@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const scoreboard = document.querySelector('ol');
         const divSB = document.getElementById('scoreboard');
         const startButton = document.querySelector('.btn__reset');
-        const mainContainer = document.querySelector('.main-container');
+        // const mainContainer = document.querySelector('.main-container');
+        const lmao = document.getElementById('lmao');
 
         let phrases = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa']
         // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(getRandomPhraseAsArray(phrases));
        
 
+
         // adds the letters of a string to the display 
         const addPhraseToDisplay = arr => {
                 for( let i = 0; i < arr.length; i++) {
@@ -66,6 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }  
                 };                
         };
+
+        // takes the letters off the string 
+        const takePhraseOffDisplay = arr => {
+                for( let i = 0; i < arr.length; i++) {
+                        const li = document.createElement('li')
+                        remove(); // this could be the problem???? 
+                }
+                return arr;
+        }
+                                
 
         addPhraseToDisplay(randomPhrase);
           
@@ -109,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         overlay.style.fontSize = '30px'
                         startOver.style.marginBottom = '26.5px';
                         overlay.appendChild(startOver);
-                        missedCounter = 0;
                         return;
                 } 
                 if(letters.length === shownLetters.length){
@@ -119,10 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         overlay.style.font = 'Tahoma'
                         overlay.style.fontSize = '30px'
                         startOver.style.marginBottom = '26.5px'
-                        overlay.appendChild(phrase)
                         overlay.appendChild(startOver);
-                        missedCounter = 0;
-
                         return;                               
                 }
         };
@@ -149,36 +157,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.style.display = 'none';
                 
         });
+
         // listen for the onscreen keyboard to be clicked
         qwerty.addEventListener('click', e => {
                 const click = e.target
                 if(click.tagName === 'BUTTON' && click.className !== 'chosen'){
                         click.className = 'chosen';
                         const match = checkLetter(click);
-                        if ( match === null  && missedCounter < 5){  
+                        if ( match === null && missedCounter < 5){  
                                 missedCounter += 1;
                                 if(missedCounter === 5){
                                         checkWin();
-                                }else  {
-                                        let lis = scoreboard.children;
-                                        for(let i=0; i<lis.length; i++){
-                                                let li = lis[i];
-                                                let images = li.children;
-                                                for(let i=0; i<images.length; i++){
-                                                        let image = images[i];
-                                                                if(image.className !== "lostHeart"){
-                                                                        image.className = "lostHeart"
-                                                                        image.src = "images/lostHeart.png";
-                                                                        return image;
-                                                                }
-                                                }
-                                               
+                                } else {
+                                      for(const lis of lmao.children){
+                                                const img = lis.firstChild;
+                                                img.src = 'images/lostHeart.png'
+                                                // return img
                                         }
-                                        return lis
                                 }
-                                return missedCounter;
-                        }
-                        else {
+                        } else {
                                 checkWin();
                         }
                               
@@ -186,58 +183,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }); 
 
         //reset hearts
-        const reset = () => {
-                let lis = scoreboard.children;
-                                        for(let i=0; i<lis.length; i++){
-                                                let li = lis[i];
-                                                let images = li.children;
-                                                for(let i=0; i<images.length; i++){
-                                                        let image = images[i];
-                                                                if(image.className !== "liveHeart"){
-                                                                        image.className = "liveHeart"
-                                                                        image.src = "images/liveHeart.png";
-                                                                }
-                                                }
-                                               
-                                        }
-                return lis
-        };
+        const reset = (arr, value) => {
+                for(const lis of arr.children){
+                        for(const img of lis.children){
+                                 img.src = `'${value}'`; 
+                        }                             
+                }
+                return arr;
+        }
         
+
+        const newPhraseButton = () => {
+                const phraseBtn = createElement('button', 'className', '.button')
+                phraseBtn.textContent = 'New Phrase';
+                phraseBtn.style.marginRight = '100px';
+                phraseBtn.style.diplay = 'flex';
+                return phraseBtn;
+        }
+
+
         //listen for the start over button to be pressed
         startOver.addEventListener('click', () => {
-                if(missedCounter === 5){    
-                        missedCounter = 0    
-                        let lis = scoreboard.children;
-                        for(let i=0; i<lis.length; i++){
-                                let li = lis[i];
-                                let images = li.children;
-                                for(let i=0; i<images.length; i++){
-                                        let image = images[i];
-                                                if(image.className !== "liveHeart"){
-                                                        image.className = 'liveHeart';
-                                                        return image;
-                                                }
-                                }
-                               
-                        }
-                        return lis
-                        
-                } else {
-                        missedCounter = 0
-                        overlay.style.zIndex = '-1';
-                        const phraseBtn = createElement('button', 'className', '.button')
-                        phraseBtn.textContent = 'New Phrase';
-                        phraseBtn.style.marginRight = '100px';
-                        phraseBtn.style.diplay = 'flex';
-                        divSB.insertBefore(phraseBtn, scoreboard);                       
-                        reset();
-                        resetKeys();
+                missedCounter = 0
+                overlay.style.zIndex = '-1';
+                const phraseBtn = newPhraseButton();
+                divSB.insertBefore(phraseBtn, scoreboard);                    
+                reset(lmao);
+                resetKeys();
+                const random = getRandomPhraseAsArray(phrases);
+                takePhraseOffDisplay(phrase)
+                addPhraseToDisplay(random);
+
+                return;
                 
-                
-                        const random = getRandomPhraseAsArray(phrases)
-                        addPhraseToDisplay(random);
-                        return;
-                }
                 
                 
         });            
