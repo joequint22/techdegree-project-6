@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		reset(lis);
 		resetKeys();
-		takePhraseOffDisplay(phrase);
+		takePhraseOffDisplay(randomPhrase);
 		const newRandomPhrase = getRandomPhraseAsArray(phrases);
 		addPhraseToDisplay(newRandomPhrase);
 
