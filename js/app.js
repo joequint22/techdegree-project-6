@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const startButton = document.querySelector('.btn__reset');
         const lis = document.querySelectorAll('.tries')
 
-        let phrases = ['qwerty', 'qewrty', 'qwerty', 'qwerty', 'qwerty']
-        // let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
+        // let phrases = ['qwerty', 'qewrty', 'qwerty', 'qwerty', 'qwerty']
+        let phrases = ["bonsoir",  "bonjour", "bienvenue", "a bientot", "au revior"];
 
         //Start Over Dom styled button
         const startOver = createElement('button', 'textContent', 'Start Over');
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (missedCounter < 5) {
                         for(let i=0; i<allChildren.length; i++){
                         const letter = allChildren[i];
-                                if(letter.className !== 'show'){
+                                if(letter.className !== 'show' && letter.className !=='space'){
                                         return; //returns to the game once it iterates through a letter that hasnt been chose, therefore does not have the show class 
                                 }
                         }
