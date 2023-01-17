@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const qwerty = document.getElementById('qwerty');
-	const phraseUL = document.getElementById('phrase').firstElementChild;
+	const phrase = document.getElementById('phrase').firstElementChild;
 	const overlay = document.getElementById('overlay');
 	const scoreboard = document.querySelector('ol');
 	const divSB = document.getElementById('scoreboard');
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// check if the game has been won or lost
 	const checkWin = () => {
-		const allChildren = phraseUL.children;
+		const allChildren = phrase.children;
 		if (missedCounter < 5) {
 			for (let i = 0; i < allChildren.length; i++) {
 				const letter = allChildren[i];
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		reset(lis);
 		resetKeys();
-		takePhraseOffDisplay(phraseUL)
+		takePhraseOffDisplay(phrase);
 		const newRandomPhrase = getRandomPhraseAsArray(phrases);
 		addPhraseToDisplay(newRandomPhrase);
 		return;
