@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const qwerty = document.getElementById('qwerty');
-	const phrase = document.getElementById('phrase').firstElementChild;
+	const phraseUL = document.getElementById('phrase').firstElementChild;
 	const overlay = document.getElementById('overlay');
 	const scoreboard = document.querySelector('ol');
 	const divSB = document.getElementById('scoreboard');
@@ -70,11 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// takes the letters off the string
 	const takePhraseOffDisplay = (arr) => {
-		const letters = arr.children;
-		for (let i = 0; i < letters.length; i++) {
-			const letter = letters[i];
-			arr.removeChild(letter);
-		}
+		arr.textContent = '';
 	};
 
 	// check if a letter is in the phrase
@@ -93,10 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// check if the game has been won or lost
 	const checkWin = () => {
-		const allChildren = phrase.children;
-		// const letters = [];
-		// const shownLetters = [];
-
+		const allChildren = phraseUL.children;
 		if (missedCounter < 5) {
 			for (let i = 0; i < allChildren.length; i++) {
 				const letter = allChildren[i];
@@ -208,10 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		reset(lis);
 		resetKeys();
-		takePhraseOffDisplay(randomPhrase);
+		takePhraseOffDisplay(phraseUL)
 		const newRandomPhrase = getRandomPhraseAsArray(phrases);
 		addPhraseToDisplay(newRandomPhrase);
-
 		return;
 	});
 });
