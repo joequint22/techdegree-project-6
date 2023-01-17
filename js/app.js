@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const qwerty = document.getElementById('qwerty');
 	const phrase = document.getElementById('phrase').firstElementChild;
 	const overlay = document.getElementById('overlay');
-	const scoreboard = document.querySelector('ol');
-	const divSB = document.getElementById('scoreboard');
 	const startButton = document.querySelector('.btn__reset');
 	const lis = document.querySelectorAll('.tries');
 
@@ -28,13 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	//new phrase button
-	// const newPhraseButton = () => {
-	//         const phraseBtn = createElement('button', 'className', '.button')
-	//         phraseBtn.textContent = 'New Phrase';
-	//         phraseBtn.style.marginRight = '100px';
-	//         phraseBtn.style.diplay = 'flex';
-	//         return phraseBtn;
-	// }
+	const newPhraseButton = () => {
+	        const phraseBtn = createElement('button', 'className', '.button')
+	        phraseBtn.textContent = 'New Phrase';
+	        phraseBtn.style.marginRight = '100px';
+	        phraseBtn.style.diplay = 'flex';
+	        return phraseBtn;
+	}
+
+	const phraseBtn = newPhraseButton();
 
 	// returns a random phrase from the array
 	const getRandomPhraseAsArray = (arr) => {
@@ -138,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	//listen for the start game button to be pressed
 	startButton.addEventListener('click', () => {
 		overlay.style.display = 'none';
-		// newPhraseButton();
 	});
 
 	// listen for the onscreen keyboard to be clicked
